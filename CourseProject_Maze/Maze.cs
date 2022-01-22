@@ -20,7 +20,7 @@ namespace CourseProject_Maze
             Data = new char[lines.Length][];
             foreach (var line in lines)
             {
-                Data[lineNum++] = line.ToCharArray();
+                Data[lineNum++] = line.Replace('o', ' ').ToCharArray();
             }
         }
 
@@ -51,35 +51,31 @@ namespace CourseProject_Maze
 
         public void Print(List<Agent> agents, Agent currAgent)
         {
-            //var data = Clone().Data;
-            //agents.ForEach(agent => data[agent.X][agent.Y] = 'o');
-            //Console.SetCursorPosition(0, 0);
-            //for (int i = 0; i < data.Length; i++)
-            //{
-            //    Console.WriteLine(new string(data[i]));
-            //}
-            //var data = Clone().Data;
+            
             for (int i = 0; i < Data.Length; i++)
             {
                 Console.WriteLine(new string(Data[i]));
             }
-            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             foreach (var point in currAgent.DeadEnds)
             {
                 Console.SetCursorPosition(point.Y, point.X);
                 Console.Write('x');
             }
             Console.ResetColor();
+
             foreach (var agent in agents)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.SetCursorPosition(agent.Y, agent.X);
                 Console.Write('o');
                 Console.ResetColor();
                 Console.SetCursorPosition(agent.PrevY, agent.PrevX);
                 Console.Write(' ');
             }
-            Console.ForegroundColor = ConsoleColor.Yellow;
+
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(currAgent.Y, currAgent.X);
             Console.Write('o');
             Console.ResetColor();

@@ -6,20 +6,32 @@ namespace CourseProject_Maze
 {
     class Program
     {
+        private static int _radius = 3;
         static void Main(string[] args)
         {
             string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-            Maze maze = new Maze(Path.Combine(projectDirectory, "maze2.txt"));
-            List<Agent> agents = new();
-            var radius = 5;
-            //agents.Add(new Agent(1, 29, radius, maze.Clone()));
-            //agents.Add(new Agent(19, 1, radius, maze.Clone()));
-            //agents.Add(new Agent(7, 13, radius, maze.Clone()));
-            agents.Add(new Agent(1, 18, radius, maze.Clone()));
-            agents.Add(new Agent(19, 1, radius, maze.Clone()));
-            agents.Add(new Agent(7, 13, radius, maze.Clone()));
+            var path = Path.Combine(projectDirectory, "maze6.txt");
+            Maze maze = new Maze(path);
+            List<Agent> agents = GetAgentsFromFile(path, maze);
             var controller = new Controller { Maze = maze, Agents = agents };
             controller.Run();
+        }
+
+        private static List<Agent> GetAgentsFromFile(string filename, Maze m)
+        {
+            var agents = new List<Agent>();
+            string[] lines = File.ReadAllLines(filename);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                for (int j = 0; j < lines[0].Length; j++)
+                {
+                    if (lines[i][j].Equals('o'))
+                    {
+                        agents.Add(new Agent(i, j, _radius, m.Clone()));
+                    }
+                }
+            }
+            return agents;
         }
     }
 }

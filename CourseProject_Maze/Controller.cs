@@ -11,12 +11,6 @@ namespace CourseProject_Maze
     {
         public Maze Maze { get; set; }
         public List<Agent> Agents { get; set; } = new();
-        //public List<Connection> Connections { get; set; } = new();
-
-        public void InitConnections()
-        {
-
-        }
 
         public void Run()
         {
@@ -26,9 +20,9 @@ namespace CourseProject_Maze
                 Thread.Sleep(100);
                 foreach (var agent in Agents)
                 {
-                    if (agent.MakeStep())
+                    if (agent.MakeStep() && agent == Agents.FirstOrDefault())
                     {
-                        return;
+                        while (true) ;
                     }
                 }
                 foreach (var agent in Agents)
@@ -72,19 +66,13 @@ namespace CourseProject_Maze
 
         private bool CanHear(Agent agent1, Agent agent2)
         {
-            //return true;
             var dist = Math.Sqrt((agent1.X - agent2.X) * (agent1.X - agent2.X)
               + (agent1.Y - agent2.Y) * (agent1.Y - agent2.Y));
-            if (dist >= agent1.Radius && dist >= agent2.Radius)
+            if (dist <= agent1.Radius && dist <= agent2.Radius)
             {
                 return true;
             }
             return false;
-        }
-
-        public void chetotamWithMessage()
-        {
-
         }
 
     }

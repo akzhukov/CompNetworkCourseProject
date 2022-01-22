@@ -13,5 +13,19 @@ namespace CourseProject_Maze
             foreach (var item in source)
                 action(item);
         }
+
+        public static void Shuffle<T>(this List<T> source)
+        {
+            Random rand = new Random(DateTime.Now.Millisecond);
+
+            for (int i = source.Count - 1; i >= 1; i--)
+            {
+                int j = rand.Next(i + 1);
+
+                T tmp = source[j];
+                source[j] = source[i];
+                source[i] = tmp;
+            }
+        }
     }
 }

@@ -41,7 +41,7 @@ namespace CourseProject_Maze
                 {
                     var backPoint = CurrentPath.Pop();
                     var currentMoves = GetFreePointsAround(backPoint);
-                    if (currentMoves.Count >= 2)
+                    if (currentMoves.Count <= 1)
                     {
                         Maze.SetPoint(backPoint, 'x');
                         DeadEnds.Add(backPoint);
@@ -55,7 +55,7 @@ namespace CourseProject_Maze
             var nextPoint = NextPoints.Pop();
             if (Maze.IsFinish(nextPoint))
             {
-                Console.WriteLine("WIN");
+                //Console.WriteLine("WIN");
                 return true;
             }
             PrevX = X;
