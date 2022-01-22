@@ -9,7 +9,7 @@ namespace CourseProject_Maze
     public class Message
     {
         public Agent Sender { get; set; }
-        public HashSet<Point> Data{ get; set; }
+        public HashSet<Point> Data { get; set; }
 
         public List<Agent> Receivers { get; set; } = new();
 

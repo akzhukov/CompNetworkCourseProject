@@ -40,8 +40,12 @@ namespace CourseProject_Maze
                 while (CurrentPath.Any())
                 {
                     var backPoint = CurrentPath.Pop();
-                    Maze.SetPoint(backPoint, 'x');
-                    DeadEnds.Add(backPoint);
+                    var currentMoves = GetFreePointsAround(backPoint);
+                    if (currentMoves.Count >= 2)
+                    {
+                        Maze.SetPoint(backPoint, 'x');
+                        DeadEnds.Add(backPoint);
+                    }
                 }
             }
 
@@ -61,6 +65,27 @@ namespace CourseProject_Maze
             CurrentPath.Push(nextPoint);
             VisitedPoints.Add(nextPoint);
             return false;
+        }
+
+        private List<Point> GetFreePointsAround(Point backPoint)
+        {
+            var result = new List<Point>();
+            var x = backPoint.X;
+            var y = backPoint.Y;
+            var currPoints = new List<Point> {
+                new Point(x, y - 1),
+                new Point(x - 1, y),
+                new Point(x + 1, y),
+                new Point(x, y + 1),
+            };
+            foreach (var currPoint in currPoints)
+            {
+                if (Maze.IsFree(currPoint))
+                {
+                    result.Add(currPoint);
+                }
+            }
+            return result;
         }
 
         private List<Point> GetPossibleMoves()

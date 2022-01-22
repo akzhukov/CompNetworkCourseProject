@@ -73,8 +73,8 @@ namespace CourseProject_Maze
         private bool CanHear(Agent agent1, Agent agent2)
         {
             //return true;
-            var dist = Math.Sqrt((agent1.X - agent2.X) * (agent1.X - agent2.X) 
-                + (agent1.Y - agent2.Y) * (agent1.Y - agent2.Y));
+            var dist = Math.Sqrt((agent1.X - agent2.X) * (agent1.X - agent2.X)
+              + (agent1.Y - agent2.Y) * (agent1.Y - agent2.Y));
             if (dist >= agent1.Radius && dist >= agent2.Radius)
             {
                 return true;

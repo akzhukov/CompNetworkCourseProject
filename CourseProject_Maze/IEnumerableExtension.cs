@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CourseProject_Maze
 {
-    public static class LinqExtensibles
+    public static class IEnumerableExtension
     {
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {

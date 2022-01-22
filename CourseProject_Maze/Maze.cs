@@ -85,7 +85,7 @@ namespace CourseProject_Maze
             Console.ResetColor();
             Console.SetCursorPosition(currAgent.PrevY, currAgent.PrevX);
             Console.Write(' ');
-            
+
             Console.SetCursorPosition(0, 0);
         }
 
